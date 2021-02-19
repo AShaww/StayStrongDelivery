@@ -13,8 +13,8 @@ class AddPriceToPackageDetailTable extends Migration
      */
     public function up()
     {
-        Schema::table('package_detail', function (Blueprint $table) {
-            $table->integer('price');
+        Schema::table('packages', function (Blueprint $table) {
+            $table->integer('price')->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ class AddPriceToPackageDetailTable extends Migration
      */
     public function down()
     {
-        Schema::table('package_detail', function (Blueprint $table) {
+        Schema::table('packages', function (Blueprint $table) {
             //
         });
     }

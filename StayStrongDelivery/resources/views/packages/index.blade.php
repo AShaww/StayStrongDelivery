@@ -4,7 +4,10 @@
                 <div class="title m-b-md">
                     Package List               
                 </div>
-               
-                
-            </div>
+           
+           @foreach($packages as $package)
+           <div>
+           {{ $package->name }} - {{ $package->type }}
+           </div>
+          @endforeach      
 @endsection             

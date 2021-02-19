@@ -6,5 +6,6 @@
         <div class="title m-b-md">
         StayStrong Delivery!
         </div>
-    </div>                       
+<a href="/packages/create">Book a Delivery</a>
+</div>                       
 @endsection

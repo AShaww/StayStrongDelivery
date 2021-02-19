@@ -18,4 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/packages', [PackageController::class, 'index']);
+Route::get('/packages/create', [PackageController::class, 'create']);
+Route::post('/packages', [PackageController::class, 'store']);
 Route::get('/packages/{id}', [PackageController::class, 'show']);
+Route::delete('/packages/{id}', [PackageController::class, 'destroy']);

@@ -13,11 +13,16 @@ class CreateDeliveryTable extends Migration
      */
     public function up()
     {
-        Schema::create('delivery', function (Blueprint $table) {
+        Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            
             $table->string('name');
             $table->string('type');
+            $table->string('length'); //Will need to see about ID
+            $table->string('width');
+            $table->string('height');
+            $table->string('weight');
         });
     }
 
@@ -28,6 +33,6 @@ class CreateDeliveryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('delivery');
+        Schema::dropIfExists('packages');
     }
 }
