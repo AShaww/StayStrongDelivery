@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="wrapper create-pizza"> 
-    <h1>Create a New Package</h1>
+    <h1 class="title">Create a New Package</h1>
     <form action="/packages" method="POST">
         @csrf
         <label for="name">Your Name:</label>
@@ -14,7 +14,7 @@
             <option value="letter">Letter</option>
             <option value="parcel">Parcel</option>
         </select>
-<label for="length">The Length:</label>
+        <label for="length">The Length:</label>
         <input type="text" id="length" name="length">
         
 
