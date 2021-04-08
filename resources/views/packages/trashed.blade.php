@@ -6,10 +6,10 @@ use App\Models\Customer;
 @section('content')
 
 <div class="wrapper package-index">
-        <h1>Package Orders</h1> <a href="/packages/trashed">deleted</a>
+        <h1>Deleted Orders</h1>
         @if($packages->count() === 0)
-          No packages
-        @else
+          No packages have been deleted
+          @else
           @foreach($packages as $package)
               <div class="package-item">
               <h4><a href="/packages/{{ $package->id }}">[ID: {{ $package->id }}] [Name: {{ Customer::find($package->customerId)->fullname ?? 'Unable to get name' }}] [Type: {{ $package->type }}]  </a></h4>            

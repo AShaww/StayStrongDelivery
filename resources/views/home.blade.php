@@ -13,8 +13,9 @@
                         </div>
                     @endif
                     {{ __('You are logged in!') }}
-                    <p><a href="/packages">View all packages in route</a></p>   
-                </div>
+                    <p><a href="/packages">View all packages in route</a></p>  
+                    <p><a href="/customers">View all packages in route</a></p>
+                    <p><a href="/packageHistory">View all packages in route</a></p>
             </div>
         </div>
     </div>

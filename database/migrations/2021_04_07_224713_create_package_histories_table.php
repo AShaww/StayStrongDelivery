@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPriceToPackageDetailTable extends Migration
+class CreatePackageHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddPriceToPackageDetailTable extends Migration
      */
     public function up()
     {
-        Schema::table('packages', function (Blueprint $table) {
-            $table->integer('price')->nullable();
+        Schema::create('package_histories', function (Blueprint $table) {
+            $table->id();
+            $table->integer('packageId')->nullable();
+            $table->string('status', 255)->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddPriceToPackageDetailTable extends Migration
      */
     public function down()
     {
-        Schema::table('packages', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('package_histories');
     }
 }

@@ -46,6 +46,9 @@ html, body {
 }
 
 footer {
+  height: 70px;
+  position: sticky;
+  margin-top: 220px;
   background: #eee;
   padding: 20px;
   text-align: center;

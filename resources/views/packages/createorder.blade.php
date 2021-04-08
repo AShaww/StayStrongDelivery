@@ -5,12 +5,20 @@
     <h1 class="title">Create a New Package</h1>
     <form action="/packages" method="POST">
         @csrf
-        <label for="name">Your Name:</label>
-        <input type="text" id="name" name="name">
-
+        
+        @if($customers->count() === 0)
+            Please add a customer first
+        @else
+            <select name="customerId" id="customerId">
+                @foreach($customers as $customer)
+                    <option value="{{ $customer->id }}" selected>{{ $customer->fullname }}</option>
+                @endforeach
+            </select>
+        @endif
+        
         <label for="type">Choose package type:</label>
         <select name="type" id="type">
-            <option value="letter">Letter</option>
+            <option value="letter" selected>Letter</option>
             <option value="parcel">Parcel</option>
         </select>
 
@@ -25,18 +33,8 @@
 
         <label for="weight">The Weight:</label>
         <input type="number"  id="weight" name="weight" class="target">
-
-        <label for="price">The Price </label>
-        <input type="number" step="0.1" id="price" name="price" readonly>
-        
         <input type="submit" value="Order Package">
-</form>
+ 
+</form>  
 </div> 
-    <script>
-        function findTotal(){
-            var 
-        }
-        console.log("Hello");
-    </script>
-
 @endsection             

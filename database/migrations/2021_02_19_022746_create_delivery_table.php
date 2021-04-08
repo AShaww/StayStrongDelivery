@@ -17,12 +17,13 @@ class CreateDeliveryTable extends Migration
             $table->id();
             $table->timestamps();
             
-            $table->string('name');
+            $table->integer('customerId')->nullable();
             $table->string('type');
             $table->string('length'); //Will need to see about ID
             $table->string('width');
             $table->string('height');
             $table->string('weight');
+            $table->softDeletes();
         });
     }
 

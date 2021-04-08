@@ -1,56 +1,113 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
+use App\Models\Customer;
 use App\Models\Package;
+use App\Models\PackageHistory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class PackageController extends Controller
 {
-    // public function __construct(){
-    //     $this->middleware('auth');   Adds middleware to every function(effects route)
-    // }
+
+    use SoftDeletes;
+
+    public function addStatus(Request $request) {
+
+        $id = $request->input('packageId');
+        $package = Package::withTrashed()->find($id);
+
+        if($package->trashed()) {
+            $package->restore();
+        }
+
+        PackageHistory::create([
+            'packageId' => $id,
+            'status' => $request->input('deliveryStatus')
+        ]);
+
+        return back();
+    }
+
+    public function edit(Request $request){ 
+        $package = Package::withTrashed()->find($request->input('packageid'));
+        
+        $package->update([
+            'customerId' => $request->input('customerId'),
+            'type' => $request->input('type'),
+            'length' => $request->input('length'),
+            'width' => $request->input('width'),
+            'height' => $request->input('height'),
+            'weight' => $request->input('weight')
+        ]);
+
+        return redirect('/packages/' . $request->input('packageid'));
+    }
+
+    public function editView($id) {
+        return view('packages.edit', [
+            'package' => Package::withTrashed()->findOrFail($id)
+        ]);
+    }
 
     public function index() {
 
-    $packages = Package::latest()->get();
+        $packages = Package::latest()->get();
 
-    return view('packages.index', [
-        'packages' => $packages,
-        
-        ]);
+        return view('packages.index', [
+            'packages' => $packages,
+            ]);
     }
+
+    public function indexWithTrashed() {
+        $packages = Package::onlyTrashed()->latest()->get();
+
+        return view('packages.trashed', [
+            'packages' => $packages,
+            ]);
+    }
+
     public function show($id){
+        $package = Package::withTrashed()->findOrFail($id);
+        return view('packages.show', ['package' => $package]);
+    }
+
+    public function createorder(){
+        return view('packages.createorder', [
+            'customers' => Customer::all()
+        ]); 
+    }
+
+    public function store(Request $request) {
+
+        $package = Package::create([
+            'customerId' => $request->input('customerId'),
+            'type' => $request->input('type'),
+            'length' => $request->input('length'),
+            'width' => $request->input('width'),
+            'height' => $request->input('height'),
+            'weight' => $request->input('weight')
+        ]);
+
+        PackageHistory::create([
+            'packageId' => $package->id,
+            'status' => 'Received at Package Handler'
+        ]);
+
+     //return redirect()->back();
+     return redirect('/packages')->with('mssg', 'Your order has been placed. Your order number is: '.$package->id);
+    }
+
+    public function delete($id) {
         $package = Package::findOrFail($id);
-        return view('packages.show', ['package' => $package,]);
-
-    }
-    public function create(){
         
-        return view('packages.create'); 
+        PackageHistory::create([
+            'packageId' => $package->id,
+            'status' => 'package deleted'
+        ]);
 
-    }
-    public function store(){
-
-        
-        $package = new Package();
-
-        $package->name = request('name');
-        $package->type = request('type');
-        $package->weight = request('weight');
-        $package->length = request('length');
-        $package->width = request('width');
-        $package->height = request('height');
-        //$package->price = request('price');
-        //dd($package);
-        $package->save();
-
-        return redirect('/packages')->with('mssg', 'Your order has been placed. Your order number is: '.$package->id);
-    }
-
-
-    public function destroy($id) {
-        $package = Package::findOrFail($id);
         $package->delete();
 
         return redirect('/packages');

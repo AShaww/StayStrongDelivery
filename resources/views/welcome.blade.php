@@ -2,10 +2,11 @@
 
 @section('content')
 <div class="content">
-    <img src="img\newLogo.png" alt="StayStrong Logo">
+    <img src="img\ParcelLogo.jpg" alt="Laravel Delivery App">
         <div class="title m-b-md">
-            StayStrong Delivery!
+            StayStrong Delivery App
         </div>
-    <a href="{{ route('packages.create') }}">Book a Delivery</a>
+    <a class="package-details" href="{{ route('customers.createcustomer') }}"> Create a Customer </a>
+    <a class="package-details" href="{{ route('packages.createorder') }}">Book Customer Delivery</a>
 </div>                       
 @endsection
