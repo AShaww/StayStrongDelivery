@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="content">
-    <img src="img\ParcelLogo.jpg" alt="Laravel Delivery App">
+    <img src="img\logo.png" alt="Laravel Delivery App Main Logo">
         <div class="title m-b-md">
             StayStrong Delivery App
         </div>

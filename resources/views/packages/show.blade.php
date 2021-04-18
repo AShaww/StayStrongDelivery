@@ -10,7 +10,7 @@ use App\Models\Customer;
     <h2 class="name">Package details for: {{ Customer::find($package->customerId)->fullname ?? 'Unable to get name' }}</h2>
     <p class="status">Latest Status: {{ $package->packagestatus }}</p>
     <p class="created_at">Created on/at: {{ $package->created_at }}</p>
-        <p class="type">Type - {{ $package->type }}</p>
+    <p class="type">Type - {{ $package->type }}</p>
     <p class="length">Length - {{ $package->length }}</p>  
     <p class="length">Width - {{ $package->width }}</p>
     <p class="length">Height - {{ $package->height }}</p>

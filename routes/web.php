@@ -10,12 +10,12 @@ Route::get('/', function () {
 
 Route::prefix('customers')->group(function() {
     Route::get('/', [CustomerController::class, 'index'])->name('customers.index');
-    Route::get('//createcustomer', [CustomerController::class, 'createcustomer'])->name('customers.createcustomer');
+    Route::get('/createcustomer', [CustomerController::class, 'createcustomer'])->name('customers.createcustomer');
     Route::post('/', [CustomerController::class, 'store'])->name('customers.store');
-    Route::get('//{id}', [CustomerController::class, 'show'])->name('customers.show');
-    Route::get('//edit/{id}', [CustomerController::class, 'edit'])->name('customers.edit');
+    Route::get('/{id}', [CustomerController::class, 'show'])->name('customers.show');
+    Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('customers.edit');
     Route::post('/', [CustomerController::class, 'update'])->name('customers.update');
-    Route::delete('//{id}', [CustomerController::class, 'delete'])->name('customers.delete');
+    Route::delete('/{id}', [CustomerController::class, 'delete'])->name('customers.delete');
 });
 
 Route::prefix('packages')->group(function() {

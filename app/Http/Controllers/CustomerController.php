@@ -16,13 +16,16 @@ class CustomerController extends Controller
         'customers' => $customers
         ]);
     }   
+    
     public function show($id){
         $customer = Customer::findOrFail($id);
         return view('customers.show', ['customer' => $customer]);
     }
+
     public function createcustomer(){
         return view('customers.createcustomer'); 
     }
+
     public function store(){
 
         $customer = new Customer();
