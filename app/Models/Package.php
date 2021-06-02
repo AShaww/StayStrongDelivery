@@ -12,7 +12,8 @@ class Package extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'customerId',
+        'senderId',
+        'recipientId',
         'type',
         'length',
         'width',
@@ -27,17 +28,39 @@ class Package extends Model
 
     /**
      * Return the newest status for a package
-    */
+     */
     public function getPackageStatusAttribute()
     {
         $packageHistory = PackageHistory::where('packageId', $this->id)->latest()->firstOrFail();
 
-        return $packageHistory->status 
-        ? $packageHistory->status . ' (' . $packageHistory->created_at->format('H:m:s d/m/Y') . ')'
-        : 'Unknown';
+        return $packageHistory->status
+            ? $packageHistory->status . ' (' . $packageHistory->created_at->format('H:m:s d/m/Y') . ')'
+            : 'Unknown';
     }
 
-    public function statuses() {
+    /**
+     * Return full name of recipient
+     */
+    public function getRecipientAttribute()
+    {
+        return Customer::findOrFail($this->recipientId);
+    }
+
+    /**
+     * Return full name of recipient
+     */
+    public function getSenderAttribute(): Customer
+    {
+        return Customer::findOrFail($this->senderId);
+    }
+
+    public function getStatusAttribute(): string
+    {
+        return PackageHistory::where('packageId', $this->id)->latest()->firstOrFail()->status;
+    }
+
+    public function statuses()
+    {
         return $this->HasMany(PackageHistory::class, 'packageId')->get();
     }
 }

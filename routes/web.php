@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Customer;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\CustomerController;
@@ -35,4 +36,8 @@ Auth::routes([
 ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+//
+//Route::get('/customer/{name}', function(string $name) {
+//   return Customer::where('fName', 'like', "%$name%")->get();
+//});
 

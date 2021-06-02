@@ -105,6 +105,7 @@ footer {
 .package-details {
   background: #f7f7f7;
   padding: 20px;
+    border-radius: 6px;
 }
 .package-details p {
   margin: 20px 0;

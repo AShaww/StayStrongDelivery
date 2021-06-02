@@ -17,7 +17,7 @@ use App\Models\Customer;
         <select name="customerId" id="customerId">
 
         @foreach(Customer::all() as $customer)
-            @if(Customer::find($package->customerId)->fullname === $customer->fullname))
+            @if(Customer::find($package->customerId))
                 <option value="{{ $customer->id }}" selected>{{ $customer->fullname }}</option>
             @else
         <option value="{{ $customer->id }}">{{ $customer->fullname }}</option>

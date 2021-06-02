@@ -16,8 +16,9 @@ class CreateDeliveryTable extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            
-            $table->integer('customerId')->nullable();
+
+            $table->integer('senderId')->nullable();
+            $table->integer('recipientId')->nullable();
             $table->string('type');
             $table->string('length'); //Will need to see about ID
             $table->string('width');

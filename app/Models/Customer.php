@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'fName',
         'lName',
@@ -19,13 +19,18 @@ class Customer extends Model
         'postcode',
     ];
 
+    public function getAddressAttribute()
+    {
+        return "$this->fAddress, $this->lAddress, $this->postcode";
+    }
+
     /**
      * Return fullname of customer
      */
     public function getFullnameAttribute()
     {
-        return "$this->fName $this->lName";
+        return ucwords("$this->fName $this->lName");
     }
 
 }
-   
+
