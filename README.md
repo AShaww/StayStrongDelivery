@@ -32,6 +32,7 @@ To get this simply create a new file and name it .env.
 ## Step Three
 #### Set an ADMIN_EMAIL AND ADMIN_PASSWORD
 Remember your account as when you run the next coming steps - This will be the username and password for the Application. This is Application is Local so make a test email, better to keep it short, in the example test@test.com is the test email.
+
 ![img_2.png](ReadMeAssets/img_2.png)
 
 ## Step Four
@@ -51,7 +52,7 @@ php artisan key:generate     <-this can be copied and pasted (ensure no spaces b
 ## Step Seven
 #### Get Vendor Folder [Build Vendor Folder](https://i.gyazo.com/20b723bba62f0c1f0c5e163c9054cf6d.mp4)
 ```html
-composer install             <-this can be copied and pasted (ensure no spaces before or after.)<-this can be copied and pasted (ensure no spaces before or after.)
+composer install             <-this can be copied and pasted (ensure no spaces before or after.)
 ```
 This will get the packages that the application needs in order to work. 
 
