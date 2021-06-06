@@ -25,8 +25,9 @@
     
     <form action="{{ route('customers.edit', $customer->id) }}" method="GET">
      
-        <button>edit Customer</button>
+        <button>Edit Customer</button>
     </form>
+    <a href="/customers"> <-- Back to All Customers</a>
 </div>
-<a href="/customers" class="back"> <-- Back to all Customers</a>
+
 @endsection             

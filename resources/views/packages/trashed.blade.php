@@ -7,8 +7,10 @@ use App\Models\Customer;
 
 <div class="wrapper package-index">
         <h1>Deleted Orders</h1>
+        <a href="/packages"> <-- Back to all Packages</a>
         @if($packages->count() === 0)
           No packages have been deleted
+          
           @else
           @foreach($packages as $package)
               <div class="package-item">
@@ -16,5 +18,6 @@ use App\Models\Customer;
               </div>
           @endforeach  
          @endif
+         
        </div>
 @endsection             

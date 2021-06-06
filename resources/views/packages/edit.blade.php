@@ -48,9 +48,7 @@ use App\Models\Customer;
 
         <label for="fAddress">Package weight</label>
         <input type="number" value="{{ $package->weight }}" name="weight">
-        
         <br>
-
         <input type="submit" value="Save Package Changes">
  
 </form>  

@@ -3,10 +3,11 @@
 use App\Models\Customer;
 
 $statusOptions = [
-    'delivered',
-    'missing',
-    'received',
-    'returned'
+    'Delivered',
+    'Missing',
+    'Received',
+    'Returned',
+    'Lost'
 ];
 
 ?>
@@ -15,7 +16,6 @@ $statusOptions = [
 @section('content')
 
     <div class="wrapper package-details">
-
         <div class="container">
             <div class="row">
                 <div class="col-9">
@@ -31,14 +31,12 @@ $statusOptions = [
                             @method('DELETE')
                             <input type="button" class="btn btn-info" value="Edit"
                                    onclick="window.location.href='/packages/edit/{{ $package->id }}'">
-                            <input type="button" class="btn btn-danger" value="Delete">
+                            <input type="submit" class="btn btn-danger" value="Delete">
                         </form>
                     @endif
                 </div>
             </div>
-
         </div>
-
     </div>
 
     <div class="wrapper package-details">
@@ -76,16 +74,14 @@ $statusOptions = [
                         </div>
                     </div>
                 </form>
-
             </div>
-
         </div>
     </div>
 
     <div class="wrapper package-details">
         <div class="row">
             <div class="col-6">
-                <label for="">Recipient Name</label>
+                <label for="">Sender Name</label>
                 <div class="input-group">
                     <input type="text" class="form-control" value="{{ $package->sender->fullname }}" readonly>
                 </div>
@@ -105,9 +101,7 @@ $statusOptions = [
                 <div class="input-group">
                     <input type="text" class="form-control" value="{{ $package->recipient->address }}" readonly>
                 </div>
-
             </div>
-
         </div>
     </div>
 
@@ -121,7 +115,6 @@ $statusOptions = [
                 <p class="length">Weight - {{ $package->weight }}</p>
             </div>
         </div>
-
     </div>
 
     <div class="wrapper package-details">
@@ -134,7 +127,7 @@ $statusOptions = [
                     <th>Time</th>
                     </thead>
                     <tbody>
-                    @foreach($package->statuses() as $status)
+                    @foreach($package->statuses as $status)
                         <tr>
                             <td>{{ $status->status }}</td>
                             <td>{{ $status->created_at->format('H:m:s d/m/Y') }}</td>

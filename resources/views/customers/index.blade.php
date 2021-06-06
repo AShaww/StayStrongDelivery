@@ -8,6 +8,7 @@
             <h4><a href="/customers/{{ $customer->id }}">[Full Name: {{ $customer->fName }} {{ $customer->lName }}] [First Line Add{{ $customer->fAddress }}]</a></h4>            
             </div>
          @endforeach  
+         <a class="to-detail" href="/"> <-- Back to Home</a>
        </div>
 @endsection             
 

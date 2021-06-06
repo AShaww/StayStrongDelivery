@@ -9,28 +9,34 @@ class Customer extends Model
 {
     use HasFactory;
 
+    /** Expecting whitelist of columns to be updated in the database.
+     * @var string[]
+     */
     protected $fillable = [
         'fName',
         'lName',
         'number',
         'email',
         'fAddress',
-        'lAddress' ,
+        'lAddress',
         'postcode',
     ];
 
+    /**
+     * Calling getAddressAttribute() returns first/last address and postcode.
+     * @return string
+     */
     public function getAddressAttribute()
     {
         return "$this->fAddress, $this->lAddress, $this->postcode";
     }
 
     /**
-     * Return fullname of customer
+     * returns customers fullname
      */
     public function getFullnameAttribute()
     {
         return ucwords("$this->fName $this->lName");
     }
-
 }
 

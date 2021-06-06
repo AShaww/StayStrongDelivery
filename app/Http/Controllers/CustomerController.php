@@ -2,66 +2,110 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Customer;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
 
 class CustomerController extends Controller
 {
-    public function index() {
+    /**
+     * @return Application|Factory|View
+     */
+    public function index()
+    {
+        $customers = Customer::latest()->get();
 
-    $customers = Customer::latest()->get();
-    
-    return view('customers.index', [
-        'customers' => $customers
+        return view('customers.index', [
+            'customers' => $customers
         ]);
-    }   
-    
-    public function show($id){
+    }
+
+    /**
+     * show customer by id
+     * @param $id
+     * @return Application|Factory|View
+     */
+    public function show($id)
+    {
         $customer = Customer::findOrFail($id);
         return view('customers.show', ['customer' => $customer]);
     }
 
-    public function createcustomer(){
-        return view('customers.createcustomer'); 
+    /**
+     *
+     * @return Application|Factory|View
+     */
+    public function createcustomer()
+    {
+        return view('customers.createcustomer');
     }
 
-    public function store(){
+    /**
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function store(Request $request)
+    {
+        $customer = Customer::create([
+            'fname' => $request->input('fName'),
+            'lName' => $request->input('lName'),
+            'number' => $request->input('number'),
+            'email' => $request->input('email'),
+            'fAddress' => $request->input('fAddress'),
+            'lAddress' => $request->input('lAddress'),
+            'postcode' => $request->input('postcode'),
+        ]);
 
-        $customer = new Customer();
-
-        $customer->fName = request('fName');
-        $customer->lName = request('lName');
-        $customer->number = request('number');
-        $customer->email = request('email');
-        $customer->fAddress = request('fAddress');
-        $customer->lAddress = request('lAddress');
-        $customer->postcode = request('postcode');
-        $customer->save();
-
-     return redirect('/customers')->with('mssg', 'Customer Created'.$customer->id);
+        return redirect('/customers')->with('mssg', 'Customer Created' . $customer->id);
     }
-    public function delete($id) {
-        
+
+    /**
+     * Delete a customer; if not found throw http 404
+     *
+     * @param $id
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function delete($id)
+    {
+
         $customer = Customer::findOrFail($id);
         $customer->delete();
 
         return redirect('/customers');
     }
-    public function edit($id){
 
+    /**
+     * Edit an existing customer or throw a http 404
+     *
+     * @param $id
+     * @return Application|Factory|View
+     */
+    public function edit($id)
+    {
         $customer = Customer::findOrFail($id);
 
-        return view('customers.edit',[
+        return view('customers.edit', [
             'customer' => $customer
         ]);
 
     }
-    public function update(Request $request){
+
+    /**
+     * Update or create new|existing customer
+     *
+     * @param Request $request
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function update(Request $request)
+    {
 
         Customer::updateOrCreate([
             'id' => $request->input('id')
-        ],[
+        ], [
             'fName' => $request->input('fName'),
             'lName' => $request->input('lName'),
             'number' => $request->input('number'),
@@ -71,8 +115,6 @@ class CustomerController extends Controller
             'postcode' => $request->input('postcode'),
         ]);
 
-
-    //  return redirect('/customers')->with('mssg', 'Customer Created'.$customer->id);
         return redirect('/customers')->with('success', 'Customer details have been successfully updated!');
     }
 }

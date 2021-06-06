@@ -1,9 +1,10 @@
 {
-    "name": "laravel/laravel",
+    "name": "amirshaww/deliveryapp",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Laravel based package delivery app",
     "keywords": [
-        "framework",
+        "delivery",
+        "app",
         "laravel"
     ],
     "license": "MIT",

@@ -31,5 +31,6 @@
         <input type="submit" value="Save Customer Changes">
  
 </form>  
+<a class="to-detail" href="/customers"> <-- Cancel Customer Edit</a>
 </div> 
 @endsection             

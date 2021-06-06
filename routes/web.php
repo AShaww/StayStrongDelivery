@@ -1,15 +1,15 @@
 <?php
 
-use App\Models\Customer;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PackageController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PackageController;
+use App\Http\Middleware\Authenticate;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('customers')->group(function() {
+Route::prefix('customers')->middleware(Authenticate::class)->group(function () {
     Route::get('/', [CustomerController::class, 'index'])->name('customers.index');
     Route::get('/createcustomer', [CustomerController::class, 'createcustomer'])->name('customers.createcustomer');
     Route::post('/', [CustomerController::class, 'store'])->name('customers.store');
@@ -19,12 +19,12 @@ Route::prefix('customers')->group(function() {
     Route::delete('/{id}', [CustomerController::class, 'delete'])->name('customers.delete');
 });
 
-Route::prefix('packages')->group(function() {
+Route::prefix('packages')->middleware(Authenticate::class)->group(function () {
     Route::get('', [PackageController::class, 'index'])->name('packages.index');
     Route::get('/edit/{id}', [PackageController::class, 'editView'])->name('packages.editview');
     Route::post('/edit', [PackageController::class, 'edit'])->name('packages.edit');
     Route::get('/trashed', [PackageController::class, 'indexWithTrashed'])->name('packages.index');
-    Route::get('/createorder', [PackageController::class, 'createorder'])->name('packages.createorder');
+    Route::get('/createorder', [PackageController::class, 'createorder'])->name('packages.order.create');
     Route::post('', [PackageController::class, 'store'])->name('packages.store');
     Route::get('/{id}', [PackageController::class, 'show'])->name('packages.show');
     Route::post('/{id}', [PackageController::class, 'addStatus'])->name('packages.updatestatus');
@@ -36,8 +36,4 @@ Auth::routes([
 ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
-//
-//Route::get('/customer/{name}', function(string $name) {
-//   return Customer::where('fName', 'like', "%$name%")->get();
-//});
 

@@ -82,7 +82,8 @@
 
                         <label for="weight">Package Weight:</label>
                         <div class="input-group">
-                            <input type="number" id="weight" name="weight" class="form-control" min="0" max="1000" value="0">
+                            <input type="number" id="weight" name="weight" class="form-control" min="0" max="1000"
+                                   value="0">
                             <div class="input-group-append">
                                 <span class="input-group-text">kg</span>
                             </div>
@@ -114,7 +115,12 @@
                 </div>
 
                 <div class="row mt-5">
-                    <div class="col-12">
+                    <div class="col-3">
+                        <a class="btn btn-danger btn-block" href="/packages">
+                            Cancel
+                        </a>
+                    </div>
+                    <div class="col-9">
                         <button class="btn btn-success btn-block" type="submit">
                             Order Package
                         </button>

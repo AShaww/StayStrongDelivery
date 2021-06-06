@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Package extends Model
@@ -11,6 +13,9 @@ class Package extends Model
     use HasFactory;
     use SoftDeletes;
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'senderId',
         'recipientId',
@@ -21,6 +26,9 @@ class Package extends Model
         'weight',
     ];
 
+    /**
+     * @var string[]
+     */
     protected $guarded = [
         'created_at',
         'updated_at'
@@ -39,7 +47,7 @@ class Package extends Model
     }
 
     /**
-     * Return full name of recipient
+     * Get package recipient
      */
     public function getRecipientAttribute()
     {
@@ -47,20 +55,26 @@ class Package extends Model
     }
 
     /**
-     * Return full name of recipient
+     * Get package sender
      */
     public function getSenderAttribute(): Customer
     {
         return Customer::findOrFail($this->senderId);
     }
 
+    /**
+     * @return string
+     */
     public function getStatusAttribute(): string
     {
         return PackageHistory::where('packageId', $this->id)->latest()->firstOrFail()->status;
     }
 
-    public function statuses()
+    /**
+     * @return HasMany
+     */
+    public function statuses(): HasMany
     {
-        return $this->HasMany(PackageHistory::class, 'packageId')->get();
+        return $this->HasMany(PackageHistory::class, 'packageId');
     }
 }
