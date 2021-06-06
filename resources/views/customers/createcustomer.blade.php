@@ -50,8 +50,8 @@
                                 </div>
                                 <div class="col-6">
                                     <button class="btn btn-success btn-sm btn-block" type="submit">Submit</button>
-
                                 </div>
+
                             </div>
                         </div>
                     </form>

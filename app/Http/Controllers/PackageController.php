@@ -113,6 +113,7 @@ class PackageController extends Controller
     }
 
     /**
+     * returns all customers in create order view
      * @return Application|Factory|View
      */
     public function createorder()
@@ -149,6 +150,7 @@ class PackageController extends Controller
     }
 
     /**
+     *  Delete creates new deleted order in PackageHistory, with packageID and status to package Deleted
      * @param $id
      * @return Application|RedirectResponse|Redirector
      */

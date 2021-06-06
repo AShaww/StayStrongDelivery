@@ -20,7 +20,7 @@ composer global require laravel/installer
 
 ---
 ### Cloning from GitHub:
-Certain steps are needed before the application will work for you. Follow the steps and the application will work for you.
+Certain steps are needed before the application will work for you. Follow the steps, and the application will work for you.
 
 ## Step One 
 #### Create a new file and name it ".env". [Create new File Demo](https://gyazo.com/de0e13646811bdb3d37094b1ffae55ee)
@@ -30,7 +30,7 @@ To get this simply create a new file and name it .env.
 #### (Bottom directory) Copy everything in .env.example and paste it (all) within the newly created .env file. [Copy .env.example file data into .env](https://i.gyazo.com/6fd7ba1e2af936c1a9045f1d1bc60027.mp4)
 
 ## Step Three
-#### Set an ADMIN_EMAIL AND ADMIN_PASSWORD
+#### Set an ADMIN_EMAIL AND ADMIN_PASSWORD - 'Important' Authentication is needed to view all customers and packages - or register on the site 'top left'.
 Remember your account as when you run the next coming steps - This will be the username and password for the Application. This is Application is Local so make a test email, better to keep it short, in the example test@test.com is the test email.
 
 ![img_2.png](ReadMeAssets/img_2.png)
@@ -54,7 +54,7 @@ php artisan key:generate     <-this can be copied and pasted (ensure no spaces b
 ```html
 composer install             <-this can be copied and pasted (ensure no spaces before or after.)
 ```
-This will get the packages that the application needs in order to work. 
+This will get the packages that Laravel needs to be able to work. 
 
 ## Step Eight
 

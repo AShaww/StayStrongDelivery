@@ -37,7 +37,6 @@ class CustomerController extends Controller
     }
 
     /**
-     *
      * @return Application|Factory|View
      */
     public function createcustomer()
@@ -46,6 +45,7 @@ class CustomerController extends Controller
     }
 
     /**
+     * Looks at name attribute from named Text field in createcustotmer.blade and saves the datta in same named field database.
      * @return Application|RedirectResponse|Redirector
      */
     public function store(Request $request)
